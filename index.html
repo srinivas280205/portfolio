@@ -180,6 +180,7 @@
                  To change: update solved numbers and bar widths -->
             <div class="leetcode-section">
                 <h2 class="section-title">LeetCode Statistics</h2>
+                <a href="https://leetcode.com/RSrinivas155" target="_blank" class="leetcode-link">
                 <div class="leetcode-card" id="leetcode-card">
                     <div class="leetcode-main">
                         <div class="leetcode-progress">
@@ -236,6 +237,7 @@
                         </div>
                     </div>
                 </div>
+                </a><!-- end leetcode-link -->
             </div>
         </div>
     </section>
@@ -358,29 +360,45 @@
                     <div class="cert-info">
                         <span class="cert-provider">NPTEL · IIT Kharagpur</span>
                         <h3>Programming In Java &nbsp;<span class="elite-badge">Elite</span></h3>
-                        <p>Feb – May 2025 &nbsp;·&nbsp; Score: 64%</p>
+                        <p>Feb – May 2025 &nbsp;·&nbsp; Score: <strong>64%</strong></p>
                     </div>
                 </div>
 
-                <!-- Cloud Computing — add image file "nptel-cloud.jpeg" to images/ folder then uncomment below -->
-                <!--
                 <div class="cert-card landscape">
-                    <div class="cert-image">
-                        <img src="images/nptel-cloud.jpeg" alt="NPTEL Cloud Computing">
+                    <div class="cert-image cert-pdf-wrap">
+                        <a href="cloud computing.pdf" target="_blank" class="pdf-open-link">
+                            <embed src="cloud computing.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
+                                   type="application/pdf" class="cert-embed">
+                            <span class="pdf-overlay-btn"><i class="fas fa-external-link-alt"></i> Open Certificate</span>
+                        </a>
                     </div>
                     <div class="cert-info">
                         <span class="cert-provider">NPTEL · IIT Kharagpur</span>
                         <h3>Cloud Computing</h3>
-                        <p>Jan – Apr 2026 &nbsp;·&nbsp; Score: 55%</p>
+                        <p>Jan – Apr 2026 &nbsp;·&nbsp; Score: <strong>55%</strong></p>
                     </div>
                 </div>
-                -->
 
             </div>
 
             <!-- ── Internship ── -->
             <h3 class="category-title">Internship</h3>
-            <div class="certificates-grid single">
+            <div class="certificates-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+
+                <div class="cert-card">
+                    <div class="cert-image cert-pdf-wrap">
+                        <a href="infosys springboard internship certificate.pdf" target="_blank" class="pdf-open-link">
+                            <embed src="infosys springboard internship certificate.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
+                                   type="application/pdf" class="cert-embed">
+                            <span class="pdf-overlay-btn"><i class="fas fa-external-link-alt"></i> Open Certificate</span>
+                        </a>
+                    </div>
+                    <div class="cert-info">
+                        <span class="cert-provider">Infosys Springboard</span>
+                        <h3>Internship 6.0 (B2) — WellBot: Global Wellness Assistant Chatbot</h3>
+                        <p>Sep 1, 2025 – Nov 5, 2025 &nbsp;·&nbsp; Issued Dec 9, 2025</p>
+                    </div>
+                </div>
 
                 <div class="cert-card">
                     <div class="cert-image">
@@ -510,7 +528,14 @@
                     </div>
                 </div>
                 <div class="contact-form">
+                    <div id="form-message" class="form-message" style="display:none;"></div>
                     <form id="contact-form">
+                        <!-- Formspree setup:
+                             1. Go to https://formspree.io
+                             2. Sign up with GitHub (free)
+                             3. Click "New Form" → copy the form ID (e.g. xabc1234)
+                             4. Replace YOUR_FORM_ID below with your actual ID -->
+                        <input type="hidden" name="_formspree_id" value="YOUR_FORM_ID">
                         <div class="form-group">
                             <input type="text"  id="name"    name="name"    placeholder="Your Name"    required>
                         </div>
@@ -521,7 +546,7 @@
                             <textarea           id="message" name="message" rows="5"
                                 placeholder="Your Message" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" id="submit-btn">
                             <i class="fas fa-paper-plane"></i> Send Message
                         </button>
                     </form>

@@ -64,20 +64,16 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Leetcode Card Click - Opens Leetcode Profile
+// LeetCode card — now wrapped in <a> tag, just add press animation
 const leetcodeCard = document.getElementById('leetcode-card');
-leetcodeCard.addEventListener('click', () => {
-    window.open('https://leetcode.com/RSrinivas155', '_blank');
-});
-
-// Add click animation to Leetcode card
-leetcodeCard.addEventListener('mousedown', () => {
-    leetcodeCard.style.transform = 'scale(0.98)';
-});
-
-leetcodeCard.addEventListener('mouseup', () => {
-    leetcodeCard.style.transform = '';
-});
+if (leetcodeCard) {
+    leetcodeCard.addEventListener('mousedown', () => {
+        leetcodeCard.style.transform = 'scale(0.98)';
+    });
+    leetcodeCard.addEventListener('mouseup', () => {
+        leetcodeCard.style.transform = '';
+    });
+}
 
 // Project Cards - Click to open GitHub
 const projectCards = document.querySelectorAll('.project-card');
@@ -138,30 +134,62 @@ document.querySelectorAll('.skill-card, .project-card, .certificate-card, .stat-
     observer.observe(el);
 });
 
-// Contact Form Submission
+// ── Contact Form — Formspree submission ──
+// SETUP (one-time, 2 minutes):
+//   1. Go to https://formspree.io  →  Sign up with GitHub (free)
+//   2. Click "New Form"  →  copy the Form ID  (looks like: xabc1234)
+//   3. Replace YOUR_FORM_ID in this file with your actual Form ID
+const FORMSPREE_ID = 'YOUR_FORM_ID'; // ← paste your Formspree form ID here
+
 const contactForm = document.getElementById('contact-form');
+const formMessage = document.getElementById('form-message');
+const submitBtn   = document.getElementById('submit-btn');
+
+function showFormMsg(type, text) {
+    formMessage.className = 'form-message ' + type;
+    formMessage.innerHTML = (type === 'success')
+        ? '<i class="fas fa-check-circle"></i> ' + text
+        : '<i class="fas fa-exclamation-circle"></i> ' + text;
+    formMessage.style.display = 'flex';
+    if (type === 'success') {
+        setTimeout(() => { formMessage.style.display = 'none'; }, 6000);
+    }
+}
+
 if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        // Get form values
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
-        
-        // Here you would typically send the data to a server
-        // For now, we'll just show an alert
-        alert(`Thank you ${name}! Your message has been received. I'll get back to you soon at ${email}.`);
-        
-        // Reset form
-        contactForm.reset();
-        
-        // Add success animation
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        submitBtn.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            submitBtn.style.transform = '';
-        }, 200);
+
+        if (FORMSPREE_ID === 'YOUR_FORM_ID') {
+            showFormMsg('error', 'Contact form not set up yet. Please email me at srinivas280205@gmail.com');
+            return;
+        }
+
+        // Loading state
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+        try {
+            const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+                method: 'POST',
+                body: new FormData(contactForm),
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                showFormMsg('success', "Message sent! I'll get back to you soon.");
+                contactForm.reset();
+            } else {
+                const data = await response.json();
+                throw new Error(data.errors ? data.errors.map(e => e.message).join(', ') : 'Submission failed');
+            }
+        } catch (err) {
+            showFormMsg('error', 'Something went wrong. Email me directly: srinivas280205@gmail.com');
+            console.error('Form error:', err);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        }
     });
 }
 

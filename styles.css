@@ -1019,6 +1019,82 @@ h1, h2, h3, h4 {
         height: 250px;
     }
 }
+/* LeetCode anchor wrapper — removes link styling */
+.leetcode-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* PDF embed inside cert card */
+.cert-pdf-wrap {
+    position: relative;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    padding: 0;
+}
+
+.cert-embed {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    pointer-events: none; /* prevents PDF controls from interfering */
+}
+
+.pdf-open-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+}
+
+.pdf-overlay-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 107, 53, 0.92);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.cert-pdf-wrap:hover .pdf-overlay-btn {
+    opacity: 1;
+}
+
+/* Contact Form Messages */
+.form-message {
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.form-message.success {
+    background-color: rgba(76, 175, 80, 0.15);
+    border: 1px solid #4caf50;
+    color: #4caf50;
+}
+
+.form-message.error {
+    background-color: rgba(244, 67, 54, 0.12);
+    border: 1px solid #f44336;
+    color: #f44336;
+}
+
 /* Publications Section */
 .publications-section {
     background-color: var(--bg-dark);
