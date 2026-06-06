@@ -1019,6 +1019,91 @@ h1, h2, h3, h4 {
         height: 250px;
     }
 }
+/* ── Internship section: fixed 2-col grid, cards don't stretch to each other ── */
+.internship-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start; /* cards stay their own height — no stretching */
+}
+
+/* ── Internship card base ── */
+.internship-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── LEFT card: landscape PDF ── */
+.cert-image.landscape-cert {
+    height: 280px;
+    background: #ffffff;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+}
+
+.cert-iframe {
+    width: 100%;
+    height: 310px;        /* slightly taller than container → hides scrollbar chrome */
+    border: none;
+    display: block;
+    pointer-events: none; /* stops internal PDF controls from interfering */
+}
+
+/* ── RIGHT card: portrait image ── */
+.cert-image.portrait-cert {
+    height: 420px;
+    background: var(--bg-darker);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+}
+
+.cert-image.portrait-cert img {
+    max-width: 80%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+}
+
+/* ── Internship cert-info: consistent text layout ── */
+.internship-card .cert-info {
+    padding: 1.4rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.internship-card .cert-info h3 {
+    font-size: 1.05rem;
+    line-height: 1.45;
+    color: var(--text-light);
+}
+
+.internship-card .cert-info p {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    margin: 0;
+}
+
+/* ── Responsive: stack on mobile ── */
+@media (max-width: 768px) {
+    .internship-grid {
+        grid-template-columns: 1fr;
+    }
+    .cert-image.portrait-cert {
+        height: 320px;
+    }
+    .cert-image.landscape-cert {
+        height: 220px;
+    }
+    .cert-iframe {
+        height: 250px;
+    }
+}
+
 /* LeetCode anchor wrapper — removes link styling */
 .leetcode-link {
     display: block;

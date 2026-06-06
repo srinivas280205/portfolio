@@ -383,13 +383,18 @@
 
             <!-- ── Internship ── -->
             <h3 class="category-title">Internship</h3>
-            <div class="certificates-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+            <div class="internship-grid">
 
-                <div class="cert-card">
-                    <div class="cert-image cert-pdf-wrap">
+                <!-- LEFT — Infosys landscape PDF -->
+                <div class="cert-card internship-card">
+                    <div class="cert-image landscape-cert">
                         <a href="infosys springboard internship certificate.pdf" target="_blank" class="pdf-open-link">
-                            <embed src="infosys springboard internship certificate.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
-                                   type="application/pdf" class="cert-embed">
+                            <iframe
+                                src="infosys springboard internship certificate.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&zoom=page-width"
+                                scrolling="no"
+                                frameborder="0"
+                                class="cert-iframe">
+                            </iframe>
                             <span class="pdf-overlay-btn"><i class="fas fa-external-link-alt"></i> Open Certificate</span>
                         </a>
                     </div>
@@ -400,8 +405,9 @@
                     </div>
                 </div>
 
-                <div class="cert-card">
-                    <div class="cert-image">
+                <!-- RIGHT — DRDO portrait image -->
+                <div class="cert-card internship-card">
+                    <div class="cert-image portrait-cert">
                         <img src="images/WhatsApp Image 2025-11-23 at 7.36.48 PM.jpeg"
                              alt="DRDO Internship Certificate">
                     </div>
