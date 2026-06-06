@@ -280,6 +280,48 @@ window.addEventListener('load', () => {
     }, 100);
 });
 
+// ── PDF Certificate Renderer (pdf.js) ──
+// Renders first page of a PDF onto a canvas — no scrollbar, full image shown
+async function renderPDFCert(pdfPath, canvasId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas || typeof pdfjsLib === 'undefined') return;
+
+    try {
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        const pdf      = await pdfjsLib.getDocument(pdfPath).promise;
+        const page     = await pdf.getPage(1);
+        const viewport = page.getViewport({ scale: 1 });
+
+        // Scale to fit container width exactly
+        const containerWidth   = canvas.parentElement.clientWidth || 600;
+        const scale            = containerWidth / viewport.width;
+        const scaledViewport   = page.getViewport({ scale });
+
+        canvas.width  = scaledViewport.width;
+        canvas.height = scaledViewport.height;
+
+        await page.render({ canvasContext: canvas.getContext('2d'), viewport: scaledViewport }).promise;
+    } catch (err) {
+        console.warn('PDF render failed for', canvasId, err);
+        // Fallback: show a link to open the PDF
+        canvas.style.display = 'none';
+        const fallback = document.createElement('a');
+        fallback.href = pdfPath;
+        fallback.target = '_blank';
+        fallback.className = 'pdf-fallback-link';
+        fallback.innerHTML = '<i class="fas fa-file-pdf"></i> View Certificate';
+        canvas.parentElement.appendChild(fallback);
+    }
+}
+
+// Render all PDF certs on page load
+window.addEventListener('load', () => {
+    renderPDFCert('infosys springboard internship certificate.pdf', 'canvas-infosys');
+    renderPDFCert('cloud computing.pdf', 'canvas-cloud');
+});
+
 // Console message
 console.log('%c👋 Welcome to my Portfolio!', 'color: #ff6b35; font-size: 20px; font-weight: bold;');
 console.log('%cFeel free to explore and check out my projects!', 'color: #4ecdc4; font-size: 14px;');

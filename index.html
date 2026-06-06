@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
 
@@ -365,10 +366,9 @@
                 </div>
 
                 <div class="cert-card landscape">
-                    <div class="cert-image cert-pdf-wrap">
+                    <div class="cert-image cert-canvas-wrap">
                         <a href="cloud computing.pdf" target="_blank" class="pdf-open-link">
-                            <embed src="cloud computing.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH"
-                                   type="application/pdf" class="cert-embed">
+                            <canvas id="canvas-cloud" class="cert-canvas"></canvas>
                             <span class="pdf-overlay-btn"><i class="fas fa-external-link-alt"></i> Open Certificate</span>
                         </a>
                     </div>
@@ -387,14 +387,9 @@
 
                 <!-- LEFT — Infosys landscape PDF -->
                 <div class="cert-card internship-card">
-                    <div class="cert-image landscape-cert">
+                    <div class="cert-image cert-canvas-wrap">
                         <a href="infosys springboard internship certificate.pdf" target="_blank" class="pdf-open-link">
-                            <iframe
-                                src="infosys springboard internship certificate.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&zoom=page-width"
-                                scrolling="no"
-                                frameborder="0"
-                                class="cert-iframe">
-                            </iframe>
+                            <canvas id="canvas-infosys" class="cert-canvas"></canvas>
                             <span class="pdf-overlay-btn"><i class="fas fa-external-link-alt"></i> Open Certificate</span>
                         </a>
                     </div>

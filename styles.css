@@ -1033,22 +1033,33 @@ h1, h2, h3, h4 {
     flex-direction: column;
 }
 
-/* ── LEFT card: landscape PDF ── */
-.cert-image.landscape-cert {
-    height: 280px;
+/* ── Canvas-rendered PDF cert (no scrollbar, full image) ── */
+.cert-image.cert-canvas-wrap {
+    height: auto !important;
     background: #ffffff;
-    overflow: hidden;
     padding: 0;
-    position: relative;
+    overflow: hidden;
 }
 
-.cert-iframe {
+.cert-canvas {
     width: 100%;
-    height: 310px;        /* slightly taller than container → hides scrollbar chrome */
-    border: none;
+    height: auto;
     display: block;
-    pointer-events: none; /* stops internal PDF controls from interfering */
 }
+
+/* Fallback if PDF.js fails */
+.pdf-fallback-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 200px;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+}
+.pdf-fallback-link i { font-size: 2rem; }
 
 /* ── RIGHT card: portrait image ── */
 .cert-image.portrait-cert {
