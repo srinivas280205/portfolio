@@ -294,18 +294,31 @@ async function renderPDFCert(pdfPath, canvasId) {
         const page     = await pdf.getPage(1);
         const viewport = page.getViewport({ scale: 1 });
 
-        // Scale to fit container width exactly
-        const containerWidth   = canvas.parentElement.clientWidth || 600;
-        const scale            = containerWidth / viewport.width;
-        const scaledViewport   = page.getViewport({ scale });
+        // ── HiDPI / Retina fix ──
+        // devicePixelRatio is 2 on Retina, 1.5 on some Windows screens, 1 on regular.
+        // We render the canvas internally at 2x (or 1.5x) resolution,
+        // then shrink it back to CSS display size — result is crisp, not blurry.
+        const dpr            = window.devicePixelRatio || 1;
+        const containerWidth = canvas.parentElement.clientWidth || 600;
+        const cssScale       = containerWidth / viewport.width;         // scale to fit card
+        const renderScale    = cssScale * dpr;                          // render at screen density
+        const scaledViewport = page.getViewport({ scale: renderScale });
 
+        // Internal canvas resolution = high-res
         canvas.width  = scaledViewport.width;
         canvas.height = scaledViewport.height;
 
-        await page.render({ canvasContext: canvas.getContext('2d'), viewport: scaledViewport }).promise;
+        // CSS display size = normal size (browser scales it down — sharp result)
+        canvas.style.width  = containerWidth + 'px';
+        canvas.style.height = (scaledViewport.height / dpr) + 'px';
+
+        await page.render({
+            canvasContext: canvas.getContext('2d'),
+            viewport: scaledViewport
+        }).promise;
+
     } catch (err) {
         console.warn('PDF render failed for', canvasId, err);
-        // Fallback: show a link to open the PDF
         canvas.style.display = 'none';
         const fallback = document.createElement('a');
         fallback.href = pdfPath;
