@@ -67,7 +67,7 @@ window.addEventListener('scroll', () => {
 // Leetcode Card Click - Opens Leetcode Profile
 const leetcodeCard = document.getElementById('leetcode-card');
 leetcodeCard.addEventListener('click', () => {
-    window.open('https://leetcode.com/Dinesh638R', '_blank');
+    window.open('https://leetcode.com/RSrinivas155', '_blank');
 });
 
 // Add click animation to Leetcode card
