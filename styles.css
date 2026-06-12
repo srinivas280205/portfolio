@@ -1278,6 +1278,29 @@ h1, h2, h3, h4 {
     color: var(--primary-color);
 }
 
+.pub-links {
+    margin-top: 0.9rem;
+}
+
+.pub-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 6px;
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.25s, color 0.25s;
+}
+
+.pub-link:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
 /* Resume Section */
 .resume-content {
     text-align: center;
